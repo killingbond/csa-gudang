@@ -1,0 +1,76 @@
+<?page title="ZK 7 with Bootstrap Demo"?>
+<?component name="button" extends="button" width="44px" height="44px"?>
+<?link rel="stylesheet" type="text/css"	href="/resource/bootstrap/css/bootstrap.css" ?>
+<?link rel="stylesheet" type="text/css" href="/resource/css/index.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/user-nav.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/sidebar.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/search.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/content-header.css.dsp" ?>
+<?link id="theme" rel="stylesheet" type="text/css"
+	href="/resource/css/light-blue.css.dsp" ?>
+
+
+<zk xmlns:n="native">
+	<style dynamic="true">
+		<!-- Make Plain Grid -->
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+	</style>
+	<div sclass="header">
+		<n:h1>
+			<!-- Header Name -->
+			<include src="content/headername.zul" />
+		</n:h1>
+	</div>
+
+	<div sclass="user-nav">
+		<!-- Header -->
+		<include src="content/header.zul" />
+	</div>
+
+	
+	<!-- Sidebar -->
+	<include src="content/sidebar.jsp" />
+
+
+	<!-- Content -->
+	<div sclass="content">
+		<div sclass="content-header">
+			<n:h1>Dashboard</n:h1>
+		</div>
+		<div sclass="breadcrumb">
+			<a href="#" tooltip="btntip,after_center"
+				iconSclass="icon-home">
+				Home
+				<custom-attributes title="Go to Home" />
+			</a>
+			<a href="index.zul">Dashboard</a>
+		</div>
+		<window apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm')@init('com.ditzweb.controllers.ClientController')"
+			validationMessages="@id('vmsgs')">
+			<vlayout xmlns:n="native" style="padding: 20px">
+				<panel border="0">
+					<panelchildren>
+						SELAMAT DATANG DI HALAMAN ADMIN
+					</panelchildren>
+				</panel>
+				<panel border="1">
+					
+				</panel>
+				<hlayout spacing="50px" style="margin-top:400px">
+					<panel border="normal" hflex="1"
+						forEach="file,comment">
+
+					</panel>
+				</hlayout>
+			</vlayout>
+		</window>
+	</div>
+</zk>

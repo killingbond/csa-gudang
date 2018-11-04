@@ -1,0 +1,208 @@
+<?page title="ZK 7 with Bootstrap Demo"?>
+<?component name="button" extends="button" width="44px" height="44px"?>
+<?link rel="stylesheet" type="text/css"	href="/resource/bootstrap/css/bootstrap.css" ?>
+<?link rel="stylesheet" type="text/css" href="/resource/css/index.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/user-nav.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/sidebar.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/search.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/content-header.css.dsp" ?>
+<?link id="theme" rel="stylesheet" type="text/css"
+	href="/resource/css/light-blue.css.dsp" ?>
+
+
+<zk xmlns:n="native">
+	<style dynamic="true">
+		<!-- Make Plain Grid -->
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }.error{color:red}
+	</style>
+	<div sclass="header">
+		<n:h1>
+			<!-- Header Name -->
+			<include src="content/headername.zul" />
+		</n:h1>
+	</div>
+
+	<div sclass="user-nav">
+		<!-- Header -->
+		<include src="content/header.zul" />
+	</div>
+
+	<!-- Sidebar -->
+	<include src="content/sidebar.jsp" />
+
+
+	<!-- Content -->
+	<div sclass="content">
+		<div sclass="content-header">
+			<n:h1>Transaksi In Update</n:h1>
+		</div>
+		<div sclass="breadcrumb">
+			<a href="#" tooltip="btntip,after_center"
+				iconSclass="icon-home">
+				Home
+				<custom-attributes title="Go to Home" />
+			</a>
+			<a href="transaksiin.zul" tooltip="btntip,after_center">
+				Transaksi In
+				<custom-attributes title="Go to Home" />
+			</a>
+			<a href="transaksiinupdate.zul">Transaksi In Update</a>
+		</div>
+		<window apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm')@init('com.ditzweb.controllers.TransaksiInUpdateRedirectController')"
+			validationMessages="@id('vmsgs')"
+			form="@id('fx') @load(vm.transIn) @save(vm.transIn, before='add') @validator('com.ditzweb.validator.FormValidatorTransaksiInUpdate', noKendaraan=vm.noKendaraan, noFaktur=vm.noFaktur, sup=vm.sup)">
+			>
+			<vlayout xmlns:n="native" style="padding: 20px">
+				<panel border="normal">
+					<caption iconSclass="icon-signal"></caption>
+					<panelchildren>
+						<grid sclass="GridLayoutNoBorder">
+							<columns>
+								<column width="150px" />
+								<column width="400px" />
+								<column width="140px" />
+								<column />
+							</columns>
+							<rows>
+								<row>
+									<label value="No Faktur Pembelian"
+										width="150px" />
+									<textbox value="@bind(vm.noFaktur)"
+										width="150px" />
+									<label class="error"
+										value="@load(vmsgs['noFaktur'])" />
+								</row>
+								<row>
+									<label value="Nama Supplier"
+										width="150px" />
+									<vbox>
+										<listbox mold="select"
+											model="@load(vm.supplier)" hflex="1"
+											selectedItem="@bind(vm.sup)">
+											<template name="model"
+												var="sup">
+												<listitem
+													label="${sup.id}" value="${sup.id}" />
+											</template>
+										</listbox>
+									</vbox>
+									<label class="error"
+										value="@load(vmsgs['sup'])" />
+								</row>
+								<row>
+									<label value="No Kendaraan"
+										width="150px" />
+									<textbox
+										value="@bind(vm.noKendaraan)" width="150px" />
+									<label class="error"
+										value="@load(vmsgs['noKendaraan'])" />
+								</row>
+								<row>
+									<label>Tgl. Registrasi</label>
+									<hlayout>
+										<datebox id="db0" cols="12"
+											format="yyyy/MM/dd" value="@bind(vm.date)" disabled="true" />
+									</hlayout>
+								</row>
+								<row>
+									<label value="" width="150px" />
+									<label value="" width="150px" />
+									<button label="Simpan"
+										onClick="@command('add')" width="125px" height="40px" />
+									<button label="Batal"
+										onClick="@command('cancel')" orient="vertical" dir="reverse"
+										width="125px" height="40px" visible="@bind(vm.addDisabled)" />
+								</row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+				<panel border="0">
+					<panelchildren>
+						<div style="float:right;">
+							<button label="Tambah Barang"
+								onClick="@command('addBarang')" visible="@bind(vm.addDisabled)"
+								width="120px" />
+						</div>
+					</panelchildren>
+				</panel>
+
+				<panel border="1">
+					<panelchildren>
+						<listbox id="" mold="paging" pageSize="11"
+							pagingPosition="top" sclass="mylist"
+							model="@load(vm.itemSupplaiIn)">
+							<listhead sizable="true">
+								<listheader label="ID Barang" />
+								<listheader label="Nama Barang " />
+								<listheader label="Satuan Input" />
+								<listheader label="Jml Satuan Input" />
+								<listheader label="Satuan Dasar" />
+								<listheader label="Jml Satuan Dasar" />
+								<listheader label="Harga Satuan Input"
+									visible="@bind(vm.editDisabled)" />
+								<listheader label="Harga Satuan Dasar"
+									visible="@bind(vm.editDisabled)" />
+								<listheader label="Harga Total"
+									visible="@bind(vm.editDisabled)" />
+								<listheader label="Action"
+									visible="@bind(vm.addDisabled)" />
+								<listheader label="Harga"
+									visible="@bind(vm.editDisabled)" />
+							</listhead>
+							<template name="model" var="m">
+								<listitem>
+									<listcell label="@load(m.item.id)" />
+									<listcell
+										label="@load(m.item.nama)" />
+									<listcell
+										label="@load(m.satuan.qty.nama)" />
+									<listcell label="@load(m.qty)" />
+									<listcell
+										label="@load(m.satuanDasar.satuanDasar.nama)" />
+									<listcell label="@load(m.jumlah)" />
+									<listcell
+										label="@load(m.hargaSatuanInput)"
+										visible="@bind(vm.editDisabled)" />
+									<listcell
+										label="@load(m.hargaSatuanDasar)"
+										visible="@bind(vm.editDisabled)" />
+									<listcell
+										label="@load(m.hargaTotal)" visible="@bind(vm.editDisabled)" />
+									<listcell
+										visible="@bind(vm.addDisabled)">
+										<button
+											onClick="@command('updateModal', obj=m)" label="Ubah"
+											width="60px" />
+										<button
+											onClick="@command('delete', obj=m)" label="Hapus"
+											width="60x" />
+									</listcell>
+									<listcell>
+										<button
+											onClick="@command('addHarga', obj=m)" label="Harga"
+											visible="@bind(vm.editDisabled)" />
+									</listcell>
+								</listitem>
+							</template>
+						</listbox>
+					</panelchildren>
+				</panel>
+				<hlayout spacing="50px" style="margin-top:20px">
+					<panel border="normal" hflex="1"
+						forEach="file,comment">
+
+					</panel>
+				</hlayout>
+			</vlayout>
+		</window>
+	</div>
+</zk>

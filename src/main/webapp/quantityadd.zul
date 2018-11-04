@@ -1,0 +1,59 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.ditzweb.controllers.QuantityModal')"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm.quantity) @save(vm.quantity, before='add') @validator('com.ditzweb.validator.FormValidatorQuantity', namax=vm.nama, deskripsi=vm.deskripsi)"
+		title="Menambah Data Quantity" border="normal" width="600px"
+		position="center,center" closable="true"
+		action="show: slideIn;hide: slideUp">
+		<vlayout>
+			<groupbox>
+				<grid>
+					<columns>
+						<column width="150px" />
+						<column width="400px" />
+						<column width="0px" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label>Nama Satuan</label>
+							<hlayout>
+								<textbox value="@save(vm.nama)" />
+								<label class="error"
+									value="@load(vmsgs['nama'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Deskripsi Satuan</label>
+							<hlayout>
+								<textbox value="@save(vm.deskripsi)" />
+								<label class="error"
+									value="@load(vmsgs['deskripsi'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label value="Status" width="150px" />
+							<vbox>
+								<combobox value="@bind(vm.status)"
+									readonly="true">
+									<comboitem label="Aktif" />
+									<comboitem label="UnAktif" />
+								</combobox>
+							</vbox>
+						</row>
+						<row>
+							<label>
+
+							</label>
+							<hlayout>
+								<button label="Simpan"
+									onClick="@command('add')" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

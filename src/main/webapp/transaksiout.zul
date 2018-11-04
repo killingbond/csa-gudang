@@ -1,0 +1,167 @@
+<?page title="ZK 7 with Bootstrap Demo"?>
+<?component name="button" extends="button" width="44px" height="44px"?>
+<?link rel="stylesheet" type="text/css"	href="/resource/bootstrap/css/bootstrap.css" ?>
+<?link rel="stylesheet" type="text/css" href="/resource/css/index.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/user-nav.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/sidebar.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/search.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/resource/css/content-header.css.dsp" ?>
+<?link id="theme" rel="stylesheet" type="text/css"
+	href="/resource/css/light-blue.css.dsp" ?>
+
+
+<zk xmlns:n="native">
+	<style dynamic="true">
+		<!-- Make Plain Grid -->
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
+	</style>
+	<div sclass="header">
+		<n:h1>
+			<!-- Header Name -->
+			<include src="content/headername.zul" />
+		</n:h1>
+	</div>
+
+	<div sclass="user-nav">
+		<!-- Header -->
+		<include src="content/header.zul" />
+	</div>
+
+	<!-- Sidebar -->
+	<include src="content/sidebar.jsp" />
+
+
+	<!-- Content -->
+	<div sclass="content">
+		<div sclass="content-header">
+			<n:h1>Transaksi Out</n:h1>
+		</div>
+		<div sclass="breadcrumb">
+			<a href="#" tooltip="btntip,after_center"
+				iconSclass="icon-home">
+				Home
+				<custom-attributes title="Go to Home" />
+			</a>
+			<a href="transaksiout.zul">Transaksi Out</a>
+		</div>
+		<window apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm')@init('com.ditzweb.controllers.TransaksiOutController')"
+			validationMessages="@id('vmsgs')">
+			<vlayout xmlns:n="native" style="padding: 20px">
+				<panel border="normal">
+					<caption iconSclass="icon-signal"></caption>
+					<panelchildren>
+						<grid sclass="GridLayoutNoBorder">
+							<columns>
+								<column width="150px" />
+								<column width="400px" />
+								<column width="140px" />
+								<column />
+							</columns>
+							<rows>
+								<row>
+									<label value="ID Transaksi"
+										width="150px" />
+									<textbox value="@save(vm.id)"
+										width="150px" />
+								</row>
+								<row>
+									<label value="Nomor Ban Penjualan"
+										width="150px" />
+									<textbox value="@save(vm.noBanPenjualan)"
+										width="150px" />
+								</row>
+								<row>
+									<label value="Nama Client"
+										width="150px" />
+									<textbox
+										value="@save(vm.namaClient)" width="150px" />
+								</row>
+								<row>
+									<label value="Tanggal"
+										width="150px" />
+									<datebox id="db1" cols="12"
+										format="medium" value="@save(vm.tanggalDari)" />
+								</row>
+								<row>
+									<label value="Sampai Tanggal"
+										width="150px" />
+									<datebox id="db2" cols="12"
+										format="medium" value="@save(vm.tanggalKe)" />
+								</row>
+								<row>
+									<label value="Status" width="150px" />
+									<vbox>
+										<combobox
+											value="@save(vm.status)">
+											<comboitem label="Aktif"
+												value="1" />
+											<comboitem label="UnAktif"
+												value="2" />
+										</combobox>
+									</vbox>
+								</row>
+								<row>
+									<label value="" width="150px" />
+									<label value="" width="150px" />
+									<button label="Cari"
+										onClick="@command('cari')" orient="vertical" dir="reverse"
+										width="125px" height="40px" />
+									<button label="Tambah"
+										onClick="@command('add')" width="125px" height="40px"
+										visible="@bind(vm.disabled)" />
+								</row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+				<panel border="1">
+					<panelchildren>
+						<listbox id="" mold="paging" pageSize="11"
+							pagingPosition="top" sclass="mylist"
+							model="@load(vm.allReordsInDB)">
+							<listhead sizable="true">
+								<listheader label="ID Transaksi" />
+								<listheader label="No Ban Penjualan" />
+								<listheader label="Nama Client" />
+								<listheader label="No Kendaraan" />
+								<listheader label="tanggal" />
+								<listheader label="Action" />
+							</listhead>
+							<template name="model" var="m">
+								<listitem>
+									<listcell label="@load(m.id)" />
+									<listcell
+										label="@load(m.noBanPenjualan)" />
+									<listcell
+										label="@load(m.namaClient.nama)" />
+									<listcell
+										label="@load(m.noKendaraan)" />
+									<listcell label="@load(m.tanggal)" />
+									<listcell>
+										<button
+											onClick="@command('updateModal', obj=m)" label="Detail"
+											width="75px" height="30px" />
+									</listcell>
+								</listitem>
+							</template>
+						</listbox>
+					</panelchildren>
+				</panel>
+				<hlayout spacing="50px" style="margin-top:20px">
+					<panel border="normal" hflex="1"
+						forEach="file,comment">
+
+					</panel>
+				</hlayout>
+			</vlayout>
+		</window>
+	</div>
+</zk>

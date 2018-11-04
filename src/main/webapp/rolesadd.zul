@@ -1,0 +1,77 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.ditzweb.controllers.RolesModal')"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm.roles) @save(vm.roles, before='add') @validator('com.ditzweb.validator.FormValidatorRoles',username=vm.username,rl=vm.rl)"
+		title="Menambah Data Roles" border="normal" width="600px"
+		position="center,center" closable="true"
+		action="show: slideIn;hide: slideUp">
+		<vlayout>
+			<groupbox>
+				<grid>
+					<columns>
+						<column width="180px" />
+						<column width="250px" />
+						<column width="100px" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label value="Username" width="80px" />
+							<vbox>
+								<listbox mold="select"
+									model="@load(vm.user)" hflex="1"
+									selectedItem="@bind(vm.username)">
+									<template name="model" var="user">
+										<listitem
+											label="${user.username}" value="${user.username}" />
+									</template>
+								</listbox>
+							</vbox>
+							<label class="error"
+									value="@load(vmsgs['username'])" />
+						</row>
+						<row>
+							<label value="Roles" width="80px" />
+							<vbox>
+								<listbox mold="select" hflex="1"
+									selectedItem="@save(vm.rl)">
+									<listitem label="Admin"
+										value="ROLE_ADMIN" />
+									<listitem label="Owner"
+										value="ROLE_OWNER" />
+									<listitem label="Stokish"
+										value="ROLE_STOKISH" />
+									<listitem label="Marketing"
+										value="ROLE_MARKETING" />
+								</listbox>
+							</vbox>
+							<label class="error"
+								value="@load(vmsgs['roles'])" />
+
+						</row>
+						<row>
+							<label value="Status" width="80px" />
+							<vbox>
+								<combobox value="@bind(vm.status)"
+									readonly="true">
+									<comboitem label="Aktif" />
+									<comboitem label="UnAktif" />
+								</combobox>
+							</vbox>
+						</row>
+						<row>
+							<label>
+
+							</label>
+							<hlayout>
+								<button label="Simpan"
+									onClick="@command('add')" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

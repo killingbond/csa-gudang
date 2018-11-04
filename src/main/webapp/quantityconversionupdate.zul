@@ -1,0 +1,56 @@
+<zk>
+    <window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('com.ditzweb.controllers.QuantityConversionModal')"
+        title="Mengubah Data Quantity Conversion" border="normal" width="600px"
+        position="center,center" closable="true"
+        action="show: slideIn;hide: slideUp">
+        <vlayout>
+            <groupbox>
+                <grid>
+                    <rows>
+                        <row>
+							<label value="Quantity dari" width="150px" />
+							<vbox>
+								<hlayout>
+                                	<textbox value="@bind(vm.qtyDari.nama)" readonly="true" />
+                            	</hlayout>
+							</vbox>		
+						</row>
+                        <row>
+							<label value="Quantity ke" width="150px" />
+							<vbox>
+								<hlayout>
+                                	<textbox value="@bind(vm.qtyKe.nama)" readonly="true" />
+                            	</hlayout>
+							</vbox>			
+						</row>
+						<row>
+                            <label>
+                                Besar Konversi
+                            </label>
+                            <hlayout>
+                                <doublebox value="@bind(vm.besarKonversi)"  />
+                            </hlayout>
+                        </row>
+                        <row>
+							<label value="Status" width="150px" />
+							<vbox>
+								<combobox value="@bind(vm.status)">
+									<comboitem label="Aktif"  />
+									<comboitem label="UnAktif" />
+								</combobox>
+							</vbox>			
+						</row>
+                        <row>
+                            <label>
+
+                            </label>
+                            <hlayout>
+                                <button label="Simpan" onClick="@command('update')" />
+                            </hlayout>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+        </vlayout>
+    </window>
+</zk>

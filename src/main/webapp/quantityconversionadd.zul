@@ -1,0 +1,76 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.ditzweb.controllers.QuantityConversionModal')"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm.quantityConversion) @save(vm.quantityConversion, before='add') @validator('com.ditzweb.validator.FormValidatorQuantityConversion',  qtyDari=vm.qtyDari, qtyKe=vm.qtyKe)"
+		title="Menambah Data Quantity Conversion" border="normal"
+		width="600px" position="center,center" closable="true"
+		action="show: slideIn;hide: slideUp">
+		<vlayout>
+			<groupbox>
+				<grid>
+					<rows>
+						<row>
+							<label value="Konversi Dari" width="150px" />
+							<vbox>
+								<label class="error"
+									value="@load(vmsgs['qtyDari'])" />
+								<listbox mold="select"
+									model="@load(vm.qty)" hflex="1"
+									selectedItem="@bind(vm.qtyDari)">
+									<template name="model"
+										var="qtyDari">
+										<listitem
+											label="${qtyDari.nama}" value="${qtyDari.id}" />
+									</template>
+								</listbox>
+							</vbox>
+						</row>
+						<row>
+							<label value="Konversi Ke" width="150px" />
+							<vbox>
+								<label class="error"
+									value="@load(vmsgs['qtyKe'])" />
+								<listbox mold="select"
+									model="@load(vm.qty)" hflex="1"
+									selectedItem="@bind(vm.qtyKe)">
+									<template name="model"
+										var="qtyKe">
+										<listitem label="${qtyKe.nama}"
+											value="${qtyKe.id}" />
+									</template>
+								</listbox>
+							</vbox>
+						</row>
+						<row>
+							<label>Besar Konversi</label>
+							<hlayout>
+								<doublebox
+									value="@save(vm.besarKonversi)" />
+							</hlayout>
+						</row>
+						<row>
+							<label value="Status" width="150px" />
+							<vbox>
+								<combobox value="@bind(vm.status)"
+									readonly="true">
+									<comboitem label="Aktif" />
+									<comboitem label="UnAktif" />
+								</combobox>
+							</vbox>
+						</row>
+						<row>
+							<label>
+
+							</label>
+							<hlayout>
+								<button label="Simpan"
+									onClick="@command('add')" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

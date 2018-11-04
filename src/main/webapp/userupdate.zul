@@ -1,0 +1,103 @@
+<zk>
+
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.ditzweb.controllers.UserModal')"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm.user) @save(vm.user, before='update') @validator('com.ditzweb.validator.FormValidatorUserUpdate')"
+		title="Mengubah Data User" border="normal" width="700px"
+		position="center,center" closable="true"
+		action="show: slideIn;hide: slideUp">
+		<vlayout>
+			<groupbox>
+				<grid>
+					<columns>
+						<column width="250px" />
+						<column width="400px" />
+						<column width="0px" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label>Username</label>
+							<hlayout>
+								<textbox value="@bind(fx.username)"
+									readonly="true" />
+								<label class="error"
+									value="@load(vmsgs['username'])" />
+								<textbox value="@bind(fx.password)"
+									readonly="true" visible="false" />
+
+							</hlayout>
+						</row>
+						<row>
+							<label>Nama User</label>
+							<hlayout>
+								<textbox value="@bind(fx.nama)" />
+								<label class="error"
+									value="@load(vmsgs['nama'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Deskripsi User</label>
+							<hlayout>
+								<textbox value="@bind(fx.deskripsi)" />
+								<label class="error"
+									value="@load(vmsgs['deskripsi'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>NPK User</label>
+							<hlayout>
+								<textbox value="@bind(fx.npk)" />
+								<label class="error"
+									value="@load(vmsgs['npk'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Alamat User</label>
+							<hlayout>
+								<textbox value="@bind(fx.alamat)" />
+								<label class="error"
+									value="@load(vmsgs['alamat'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>No Kontak</label>
+							<hlayout>
+								<textbox value="@bind(fx.noKontak)" />
+								<label class="error"
+									value="@load(vmsgs['noKontak'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Tgl. Registrasi</label>
+							<hlayout>
+								<datebox id="db0" cols="12"
+									format="yyyy/MM/dd" value="@bind(fx.date)" disabled="true" />
+							</hlayout>
+						</row>
+						<row>
+							<label value="Status" width="150px" />
+							<vbox>
+								<combobox value="@bind(fx.status)"
+									readonly="true">
+									<comboitem label="Aktif" />
+									<comboitem label="UnAktif" />
+								</combobox>
+							</vbox>
+						</row>
+						<row>
+							<label>
+
+							</label>
+							<hlayout>
+								<button label="Simpan"
+									onClick="@command('update')" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

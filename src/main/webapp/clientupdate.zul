@@ -1,0 +1,82 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.ditzweb.controllers.ClientModal')"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm.client) @save(vm.client, before='update') @validator('com.ditzweb.validator.FormValidatorClientUpdate', nama=vm.nama, deskripsi=vm.deskripsi, namaKontak =vm.namaKontak, telpKontak =vm.telpKontak)"
+		title="Mengubah Data Client" border="normal" width="600px"
+		position="center,center" closable="true"
+		action="show: slideIn;hide: slideUp">
+		<vlayout>
+			<groupbox>
+				<grid>
+					<columns>
+						<column width="150px" />
+						<column width="400px" />
+						<column width="0px" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label>ID Client</label>
+							<hlayout>
+								<textbox value="@bind(vm.id)"
+									readonly="true" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Nama Client</label>
+							<hlayout>
+								<textbox value="@bind(vm.nama)" />
+								<label class="error"
+									value="@load(vmsgs['nama'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Deskripsi</label>
+							<hlayout>
+								<textbox value="@bind(vm.deskripsi)" />
+								<label class="error"
+									value="@load(vmsgs['deskripsi'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Nama Kontak</label>
+							<hlayout>
+								<textbox value="@bind(vm.namaKontak)" />
+								<label class="error"
+									value="@load(vmsgs['namaKontak'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Telp Kontak</label>
+							<hlayout>
+								<textbox value="@bind(vm.telpKontak)" />
+								<label class="error"
+									value="@load(vmsgs['telpKontak'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label value="Status" width="150px" />
+							<vbox>
+								<combobox value="@bind(vm.status)"
+									readonly="true">
+									<comboitem label="Aktif" />
+									<comboitem label="unAktif" />
+								</combobox>
+							</vbox>
+						</row>
+						<row>
+							<label>
+
+							</label>
+							<hlayout>
+								<button label="Simpan"
+									onClick="@command('update')" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

@@ -1,0 +1,84 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.ditzweb.controllers.ItemsQuantityModal')"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm.itemsQuantity) @save(vm.itemsQuantity, before='add') @validator('com.ditzweb.validator.FormValidatorItemsQuantity', items=vm.items, qtys=vm.qtys)"
+		title="Menambah Data Items Quantity" border="normal" width="600px"
+		position="center,center" closable="true"
+		action="show: slideIn;hide: slideUp">
+		<vlayout>
+			<groupbox>
+				<grid>
+					<columns>
+						<column width="150px" />
+						<column width="400px" />
+						<column width="0px" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label value="Nama Barang" width="150px" />
+							<vbox>
+								<label class="error"
+									value="@load(vmsgs['items'])" />
+								<listbox mold="select"
+									model="@load(vm.item)" hflex="1"
+									selectedItem="@bind(vm.items)">
+									<template name="model" var="item">
+										<listitem label="${item.nama}"
+											value="${item.id}" />
+									</template>
+								</listbox>
+							</vbox>
+						</row>
+						<row>
+							<label value="Nama Satuan" width="150px" />
+							<vbox>
+								<label class="error"
+									value="@load(vmsgs['qty'])" />
+								<listbox mold="select"
+									model="@load(vm.qty)" hflex="1"
+									selectedItem="@bind(vm.qtys)">
+									<template name="model" var="qty">
+										<listitem label="${qty.nama}"
+											value="${qty.id}" />
+									</template>
+								</listbox>
+
+							</vbox>
+
+						</row>
+						<row>
+							<label value="Status" width="150px" />
+							<vbox>
+								<combobox value="@bind(vm.status)"
+									readonly="true">
+									<comboitem label="Aktif" />
+									<comboitem label="UnAktif" />
+								</combobox>
+							</vbox>
+						</row>
+						<row>
+							<label value="Satuan Dasar" width="150px" />
+							<vbox>
+								<checkbox
+									checked="@bind(vm.satuanDasar)" value="asd" />
+							</vbox>
+						</row>
+
+
+						<row>
+							<label>
+
+							</label>
+							<hlayout>
+								<button label="Simpan"
+									onClick="@command('add')" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

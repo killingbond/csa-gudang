@@ -1,0 +1,71 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.ditzweb.controllers.ItemsModal')"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm.items) @save(vm.items, before='add') @validator('com.ditzweb.validator.FormValidatorItems',  nama=vm.nama, deskripsi=vm.deskripsi)"
+		title="Menambah Data Items" border="normal" width="600px"
+		position="center,center" closable="true"
+		action="show: slideIn;hide: slideUp">
+		<vlayout>
+			<groupbox>
+				<grid>
+					<rows>
+						<row>
+							<label>Nama Barang</label>
+							<hlayout>
+								<textbox value="@save(vm.nama)" />
+								<label class="error"
+									value="@load(vmsgs['nama'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Deskripsi</label>
+							<hlayout>
+								<textbox value="@save(vm.deskripsi)" />
+								<label class="error"
+									value="@load(vmsgs['deskripsi'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>File</label>
+							<hlayout>
+								<grid>
+									<rows>
+										<row>
+											<image
+												content="@bind(vm.myImage)" height="80px" width="80px" />
+										</row>
+										<row>
+											<button id="btnUpload"
+												mold="trendy" upload="true" label="Upload Image"
+												onUpload="@command('upload')" />
+										</row>
+									</rows>
+								</grid>
+							</hlayout>
+						</row>
+						<row>
+							<label value="Status" width="150px" />
+							<vbox>
+								<combobox value="@bind(vm.status)"
+									readonly="true">
+									<comboitem label="Aktif" />
+									<comboitem label="UnAktif" />
+								</combobox>
+							</vbox>
+						</row>
+						<row>
+							<label>
+
+							</label>
+							<hlayout>
+								<button label="Simpan"
+									onClick="@command('add')" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

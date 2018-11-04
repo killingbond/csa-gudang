@@ -1,0 +1,61 @@
+<zk>
+
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.ditzweb.controllers.ItemsQuantityModal')"
+		title="Mengubah Data Items Quantity" border="normal" width="600px"
+		position="center,center" closable="true"
+		action="show: slideIn;hide: slideUp">
+		<vlayout>
+			<groupbox>
+				<grid>
+					<rows>
+						<row>
+							<label value="Nama Barang" width="150px" />
+							<vbox>
+								<hlayout>
+									<textbox
+										value="@load(vm.items.nama)" readonly="true" />
+								</hlayout>
+							</vbox>
+						</row>
+						<row>
+							<label value="Nama Barang" width="150px" />
+							<vbox>
+								<hlayout>
+									<textbox
+										value="@load(vm.qtys.nama)" readonly="true" />
+								</hlayout>
+							</vbox>
+						</row>
+						<row>
+							<label value="Status" width="150px" />
+							<vbox>
+								<combobox value="@bind(vm.status)"
+									readonly="true">
+									<comboitem label="Aktif" />
+									<comboitem label="UnAktif" />
+								</combobox>
+							</vbox>
+						</row>
+						<row>
+							<label value="Satuan Dasar" width="150px" />
+							<vbox>
+								<checkbox
+									checked="@bind(vm.satuanDasar)" disabled="@bind(vm.disable)" />
+							</vbox>
+						</row>
+						<row>
+							<label>
+
+							</label>
+							<hlayout>
+								<button label="Simpan"
+									onClick="@command('update')" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

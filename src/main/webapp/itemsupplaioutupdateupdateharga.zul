@@ -1,0 +1,87 @@
+<zk>
+    <window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('com.ditzweb.controllers.ItemSupplaiOutUpdateHargaModal')"
+        title="Mengubah Data Harga" border="normal" width="600px"
+        position="center,center" closable="true"
+        action="show: slideIn;hide: slideUp">
+        <vlayout>
+            <groupbox>
+                <grid>
+                    <rows> 
+						 <row>
+                            <label>
+                                Nama Barang
+                            </label>
+                            <hlayout>
+                                <textbox value="@bind(vm.items.nama)" readonly="true" />
+                            </hlayout>
+                        </row>
+                        <row>
+                            <label>
+                                Satuan Barang
+                            </label>
+                            <hlayout>
+                                <textbox value="@bind(vm.itemsQuantity.qty.nama)" readonly="true" />
+                            </hlayout>
+                        </row>
+						 <row>
+                            <label>
+                                Jml Satuan Input
+                            </label>
+                            <hlayout>
+                                <intbox value="@bind(vm.jmlQty)" readonly="true" />
+                            </hlayout>
+                        </row>
+                        <row>
+                            <label>
+                                Satuan Dasar
+                            </label>
+                            <hlayout>
+                                <textbox value="@bind(vm.satuanDasar.satuanDasar.nama)" readonly="true" />
+                            </hlayout>
+                        </row>
+                        <row>
+                            <label>
+                                Jml Satuan Dasar
+                            </label>
+                            <hlayout>
+                                <textbox value="@bind(vm.jmlSatuanDasar)" readonly="true" />
+                            </hlayout>
+                        </row>
+						 <row>
+                            <label>
+                                Harga Satuan Input
+                            </label>
+                            <hlayout>
+                                <doublebox value="@bind(vm.hargaSatuanInput)" />
+                            </hlayout>
+                        </row>
+                        <row>
+                            <label>
+                                Harga Satuan Dasar
+                            </label>
+                            <hlayout>
+                                <doublebox value="@bind(vm.hargaSatuanDasar)" readonly="true" />
+                            </hlayout>
+                        </row>
+                        <row>
+                            <label>
+                                Harga Total 
+                            </label>
+                            <hlayout>
+                                <doublebox value="@bind(vm.hargaTotal)" readonly="true" />
+                            </hlayout>
+                        </row>
+                        <row>
+                            <label>
+
+                            </label>
+                            <hlayout>
+                                <button label="Simpan" onClick="@command('add') @global-command('updateUpdateHargaItemSupplaiOut', obj=vm.itemSupplaiOut , obj2=vm.key)" />
+                            </hlayout>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+        </vlayout>
+    </window>
+</zk>

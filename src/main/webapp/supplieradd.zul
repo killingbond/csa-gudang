@@ -1,0 +1,83 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.ditzweb.controllers.SupplierModal')"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm.supplier) @save(vm.supplier, before='add') @validator('com.ditzweb.validator.FormValidatorSupplier', idz=vm.id, nama=vm.nama, deskripsi=vm.deskripsi, namaKontak =vm.namaKontak, telpKontak =vm.telpKontak)"
+		title="Menambah Data Supplier" border="normal" width="600px"
+		position="center,center" closable="true"
+		action="show: slideIn;hide: slideUp">
+		<vlayout>
+			<groupbox>
+				<grid>
+					<columns>
+						<column width="150px" />
+						<column width="400px" />
+						<column width="0px" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label>ID Supplier</label>
+							<hlayout>
+								<textbox value="@save(vm.id)" />
+								<label class="error"
+									value="@load(vmsgs['idz'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Nama Supplier</label>
+							<hlayout>
+								<textbox value="@save(vm.nama)" />
+								<label class="error"
+									value="@load(vmsgs['nama'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Deskripsi</label>
+							<hlayout>
+								<textbox value="@save(vm.deskripsi)" />
+								<label class="error"
+									value="@load(vmsgs['deskripsi'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Nama Kontak</label>
+							<hlayout>
+								<textbox value="@save(vm.namaKontak)" />
+								<label class="error"
+									value="@load(vmsgs['namaKontak'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Telp Kontak</label>
+							<hlayout>
+								<textbox value="@save(vm.telpKontak)" />
+								<label class="error"
+									value="@load(vmsgs['telpKontak'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label value="Status" />
+							<vbox>
+								<combobox value="@bind(vm.status)"
+									readonly="true">
+									<comboitem label="Aktif" />
+									<comboitem label="UnAktif" />
+								</combobox>
+							</vbox>
+						</row>
+						<row>
+							<label>
+
+							</label>
+							<hlayout>
+								<button label="Simpan"
+									onClick="@command('add')" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

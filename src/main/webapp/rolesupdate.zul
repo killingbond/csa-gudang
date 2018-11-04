@@ -1,0 +1,68 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.ditzweb.controllers.RolesModal')"
+		title="Mengubah Data Roles" border="normal" width="600px"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm.roles) @save(vm.roles, before='update') @validator('com.ditzweb.validator.FormValidatorRolesUpdate',username=vm.username,rl=vm.rl,initRoles=vm.initRoles)"
+		position="center,center" closable="true"
+		action="show: slideIn;hide: slideUp">
+		<vlayout>
+			<groupbox>
+				<grid>
+					<columns>
+						<column width="180px" />
+						<column width="250px" />
+						<column width="100px" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label>Username</label>
+							<hlayout>
+								<textbox
+									value="@bind(vm.username.username)" readonly="true" />
+							</hlayout>
+						</row>
+						<row>
+							<label value="Roles" width="150px" />
+							<vbox>
+								<listbox mold="select" hflex="1"
+									selectedItem="@bind(vm.rl)">
+									<listitem label="Admin"
+										value="ROLE_ADMIN" />
+									<listitem label="Owner"
+										value="ROLE_OWNER" />
+									<listitem label="Stokish"
+										value="ROLE_STOKISH" />
+									<listitem label="Marketing"
+										value="ROLE_MARKETING" />
+								</listbox>
+							</vbox>
+							<label class="error"
+								value="@load(vmsgs['roles'])" />
+						</row>
+						<row>
+							<label value="Status" width="150px" />
+							<vbox>
+								<combobox value="@bind(vm.status)"
+									readonly="true">
+									<comboitem label="Aktif" />
+									<comboitem label="UnAktif" />
+								</combobox>
+							</vbox>
+						</row>
+						<row>
+							<label>
+
+							</label>
+							<hlayout>
+								<button label="Simpan"
+									onClick="@command('update')" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

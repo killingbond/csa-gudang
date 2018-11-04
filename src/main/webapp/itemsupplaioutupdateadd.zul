@@ -1,0 +1,100 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.ditzweb.controllers.ItemSupplaiOutUpdateModal')"
+		validationMessages="@id('vmsgs')"
+		form="@id('fx') @load(vm.itemSupplaiOut) @save(vm.itemSupplaiOut, before='add') @validator('com.ditzweb.validator.FormValidatorItemSupplaiOutUpdateAdd', items=vm.items, itemsQuantity=vm.itemsQuantity , jmlQty=vm.jmlQty, satuanDasar=vm.satuanDasar,jmlSatuanDasar=vm.jmlSatuanDasar)"
+		title="Menambah Data Item Supplai Out" border="normal" width="600px"
+		position="center,center" closable="true"
+		action="show: slideIn;hide: slideUp">
+		<vlayout>
+			<groupbox>
+				<grid>
+					<columns>
+						<column width="400px" />
+					</columns>
+					<rows>
+						<row>
+							<label class="error"
+								value="@load(vmsgs['satuan'])" />
+						</row>
+					</rows>
+				</grid>
+				<grid>
+					<columns>
+						<column width="150px" />
+						<column width="230px" />
+						<column width="300px" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label value="Nama Barang" width="150px" />
+							<vbox>
+								<listbox mold="select"
+									model="@bind(vm.itemList)" hflex="1"
+									selectedItem="@bind(vm.items)">
+									<template name="model" var="item">
+										<listitem label="${item.nama}"
+											value="${item.id}" />
+									</template>
+								</listbox>
+							</vbox>
+							<hlayout>
+								<label class="error"
+									value="@load(vmsgs['items'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label value="Satuan Barang" width="150px" />
+							<vbox>
+								<listbox mold="select"
+									model="@load(vm.itemsQtyList)" hflex="1" sclass="mylist"
+									selectedItem="@bind(vm.itemsQuantity)">
+									<template name="model" var="qty">
+										<listitem
+											label="${qty.qty.nama}" value="${qty.id}" />
+									</template>
+								</listbox>
+							</vbox>
+						</row>
+						<row>
+							<label>Jml Satuan Input</label>
+							<hlayout>
+								<intbox value="@bind(vm.jmlQty)" />
+							</hlayout>
+							<hlayout>
+								<label class="error"
+									value="@load(vmsgs['jmlQty'])" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Satuan</label>
+							<hlayout>
+								<textbox
+									value="@bind(vm.satuanDasar.satuanDasar.nama)" readonly="true" />
+							</hlayout>
+						</row>
+						<row>
+							<label>Jml Satuan Dasar</label>
+							<hlayout>
+								<textbox
+									value="@bind(vm.jmlSatuanDasar)" readonly="true" />
+							</hlayout>
+							<label class="error"
+								value="@load(vmsgs['jmlSatuanDasar'])" />
+						</row>
+						<row>
+							<label>
+
+							</label>
+							<hlayout>
+								<button label="Simpan"
+									onClick="@command('add')" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

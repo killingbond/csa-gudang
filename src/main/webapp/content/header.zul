@@ -1,0 +1,6 @@
+<menubar apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm')@init('com.ditzweb.controllers.HeaderController')">
+	<menuitem iconSclass="icon icon-white icon-user" label="@bind(vm.adit)" />
+	<menuitem iconSclass="icon icon-white icon-share-alt"
+		label="Logout" href="j_spring_security_logout" />
+</menubar>
